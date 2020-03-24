@@ -1,0 +1,51 @@
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6 text-center" style="background: #fff7ed">
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <p class="h1">Welcome</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 align-self-center">
+            <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+                <div class="form-row justify-content-center">
+                    <div class="form-group col-10">
+                        <p class="h3 mb-0">Sign in</p>
+                    </div>
+                    <div class="form-group col-10">
+                        <ngb-alert type="danger" (close)="closeAlert()" *ngIf="error">{{ error }}</ngb-alert>
+                    </div>
+                    <div class="form-group col-10">
+                        <input class="form-control" type="email" formControlName="email">
+                        <div class="error-msg"
+                            *ngIf="loginForm.get('email').errors?.required && loginForm.controls['email'].touched">
+                            *Email is required
+                        </div>
+                        <div class="error-msg" *ngIf="loginForm.get('email').errors?.email">
+                            *Email is invalid
+                        </div>
+                    </div>
+                    <div class="form-group col-10">
+                        <input class="form-control" type="password" formControlName="password">
+                        <div class="error-msg"
+                            *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
+                            *Password is required
+                        </div>
+                    </div>
+                    <div class="form-group col-10">
+                        <button class="btn btn-link text-decoration-none" type="button"
+                            routerLink="/auth/forgot-password">
+                            Forgot Password?
+                        </button>
+                    </div>
+                    <div class="form-group col-10">
+                        <button class="btn btn-primary btn-block" type="submit" [disabled]="loginForm.invalid">
+                            Login
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
